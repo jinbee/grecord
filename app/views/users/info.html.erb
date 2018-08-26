@@ -1,0 +1,23 @@
+    <% if notice %>
+      <div class="alert alert-info" role="alert">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        <%= notice %>
+      </div>
+    <% end %>
+		<div class="row section featured topspace">
+			<div class="row">
+				<div class="col-sm-6 col-md-4">
+				    
+					<h3 class="text-center">ログインID/ユーザ名の変更</h3>
+					<p class="text-center"><%= link_to 'edit' , edit_user_path(current_user.id) , class: "btn btn-action" %></p>
+				</div>
+				<div class="col-sm-6 col-md-4">
+					<h3 class="text-center">PWの変更</h3>
+					<p class="text-center"><%= link_to 'edit' , editpw_user_path(current_user.id) , class: "btn btn-action" %></p>
+				</div>
+				<div class="col-sm-6 col-md-4">
+					<h3 class="text-center">アカウントの削除</h3>
+					<p class="text-center"><%= link_to 'Delete' , user_path(current_user.id),method: :delete,data:{confirm:'本当に削除しますかOK?'}, class: "btn btn-action"%></p>
+				</div>
+			</div>
+		</div> <!-- / section -->

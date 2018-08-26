@@ -1,0 +1,19 @@
+		<div class="row section featured topspace">
+		   <% flash.each do |key, value| %>
+    	      <%= content_tag(:div, value, class: "#{key}") %>
+    	   <% end %>  
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<h3 class="text-center">About</h3>
+						<p class="text-center"> <span>国内スマホゲーム市場は1兆円に迫る規模との事。<br>
+						このWebアプリはそんな市場を支えるあなたの大勝利と爆死を記録するアプリです。</span></p>
+				</div>
+					<div class="col-sm-6 col-md-6">
+						<p class="text-center"><a href="<%= new_session_path %>" class="btn btn-action"><span class="fa fa-sign-in" aria-hidden="true"></span>Login</a></p>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<p class="text-center"><a href="<%= signup_users_path %>" class="btn btn-action"><span class="fa fa-user-plus" aria-hidden="true"></span>Sing UP</a></p>
+					</div>		
+			</div>
+		</div>
+	

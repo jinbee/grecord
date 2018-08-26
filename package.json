@@ -1,0 +1,9 @@
+{
+  "name": "grecord",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1"
+  }
+}

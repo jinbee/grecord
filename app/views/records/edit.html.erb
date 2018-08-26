@@ -1,0 +1,54 @@
+<% if @record.errors.any? %>
+<% @record.errors.full_messages.each do |msg| %>
+<div class="alert alert-danger" role="alert">
+  <i class="fa fa-check" aria-hidden="true"></i>
+  <%= msg %>
+</div>
+<% end %>
+<% end %>
+<%= form_with(model:@record,url:record_path,local:true,class: 'form-horizontal') do |f|  %>
+<div class="row">
+  <div class="col-sm-6">
+    <label for="inputGname">ソシャゲ名</label>
+    <%= select :record, :sgame_id, @select %>
+  </div>
+  <div class="col-sm-6">
+    <label for="inputGname">ガチャ日時</label>
+    <div class='input-group' id='datetimepicker'>
+      <%= f.text_field :recorddate, class: 'form-control' %>
+      <span class="input-group-addon">
+        <span class="fa fa-calendar"></span>
+      </span>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <label for="inputOutgo">課金額</label>
+    <%= f.number_field :outgo %>
+  </div>
+  <div class="col-sm-6">
+    <label for="inputOutgo">ガチャ回数</label>
+    <%= f.number_field :count %>
+  </div>
+  
+  <div class="col-sm-6">
+    <label for="inputPurpose">目標</label>
+    <%= f.text_area :purpose ,class:"form-control" %>
+  </div>
+  <div class="col-sm-6">
+    <label for="inputRoutine">ルーチンとかおまじないとか</label>
+    <%= f.text_area :routine ,class:"form-control" %>
+  </div>
+  <div class="col-sm-6">
+    <label for="inputComment">結果</label>
+    <%= select :record, :result, [['大勝利','大勝利'],['勝利','勝利'],['辛勝','辛勝'],['瀕死','瀕死'],['爆死','爆死']] %>
+  </div>
+  <div class="col-sm-6">
+    <label for="inputOutgo">最高レア数</label>
+    <%= f.number_field :maxrate %>
+    
+  </div>
+  <div class="col-sm-12">
+    <%= f.submit '登録' ,class:'btn btn-primary btn-block'%>
+  </div>
+</div>
+<% end %>

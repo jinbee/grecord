@@ -1,0 +1,29 @@
+				 <% if @sgames.errors.any? %>
+				   <% @sgames.errors.full_messages.each do |msg| %>
+				     <div class="text-center">
+					 	<%= msg %>
+				 	</div>
+				   <% end %>
+				 <% end %>
+	<div class="main-center">
+    	<%= form_with(model:@sgames,local:true, url: sgames_path ,class: 'form-horizontal') do |f|  %>	 
+    		<div class="form-group">
+    			<label for="name" class="cols-sm-2 control-label">Game Title</label>
+    			<div class="cols-sm-10">
+    				<div class="input-group">
+    					<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+    					<%= f.text_field :gname ,class:'form-control'%>
+    				</div>
+    			</div>
+    			
+    			<label for="name" class="cols-sm-2 control-label">有効/無効</label>
+    			<div class="cols-sm-10">
+    				<div class="input-group">
+    				    <%= f.check_box :status , {} , "true", "false" %>
+    				</div>
+    			</div>
+	    <div class="text-center">
+		  <%= f.submit '登録' ,class:'btn btn-primary'%>
+        </div>
+		<% end %>
+	</div>

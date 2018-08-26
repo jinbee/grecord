@@ -1,0 +1,23 @@
+ja:
+  activerecord:
+    models:
+      budget: "予算"
+      user: "ユーザー"
+      sgame: "ゲーム"
+      record: "ガチャ記録"
+    attributes:
+      record:
+        outgo: "課金額"
+        count: "ガチャ回数"
+      sgame:
+        gname: "ゲームタイトル"
+      budget:
+        month: "設定月"
+        budget: "月予算"
+      user:
+        title: "タイトル"
+        name: "名前"
+        email: "メールアドレス"
+        current_password: "現在のパスワード"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"

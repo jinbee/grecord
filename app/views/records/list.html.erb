@@ -1,0 +1,86 @@
+<div class="row topspace">
+  
+  
+
+      <article class="col-sm-6 text-center">
+        ガチャ回数
+        <h1 class="jumbo">
+          <% if @result2[0]['sum'].present? %>
+            <%= @result2[0]['sum'] %>
+          <% else %>
+            0
+          <% end %>
+          回</h1>
+      </article>
+      <article class="col-sm-6 text-center">
+        勝率
+        <h1 class="jumbo">
+          <% if @result2[0]['rate'].nan? %>
+            -</h1>
+          <% else %>
+            <%= @result2[0]['rate'] %>%</h1>
+          <% end %>
+        
+      </article>
+
+
+  
+  
+  <article class="col-sm-4 col-sm-offset-4 text-center">
+    <header>
+      <h1 class="page-title">ガチャ記録一覧</h1>
+    </header>
+    <%= form_with( scope: :session, url: list_records_path,local:true) do|form| %>			
+    <div class="form-group">
+      <div class='input-group date' id='datetimepicker10'>
+        <input type='text' name='month' class="form-control" value="<%= @m %>"/>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar">
+          </span>
+        </span>
+      </div>
+    </div>
+    <%= form.submit "表示月選択" , class: "btn btn-action" %>
+    <% end %>	
+  </div>
+  
+  <% if notice %>
+  <div class="alert alert-info" role="alert alert-dismissible">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    <%= notice %>
+  </div>
+  <% end %>
+  
+  <% if @result.blank? %>
+  <div class="alert alert-info" role="alert">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    記録がありません。
+  </div>
+  <% else %>  
+  <table class="table table-striped">
+    <tr><th class="col-xs-4">Title</th><th>日時</th><th>課金額</th><th>結果</th><th>ガチャ回数</th><th></th></tr>   
+    <% @result.each do |value| %>
+    <tr>
+      <td><%= value['gname'] %></td>
+      <td><%= value['recorddate'] %></td>
+      <td><%= value['outgo'] %></td>
+      <td><%= value['result'] %></td>
+      <td><%= value['count'] %></td>
+      <td>
+        <%= link_to '編集' , edit_record_path(value['id']) , class: "btn btn-link active"%>
+        <%= link_to '削除' , record_path(value['id']),method: :delete,data:{confirm:'削除しますか?'} , class: "btn btn-link"%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <% end %>            
+    
+  <script type="text/javascript">
+  $(function () {
+    $('#datetimepicker10').datetimepicker({
+      viewMode: 'months',
+      locale: 'ja',
+      format: 'YYYY/MM'
+    });
+  });
+  </script>
