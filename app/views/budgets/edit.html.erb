@@ -1,34 +1,32 @@
-				 <% if @budget.errors.any? %>
-				   <% @budget.errors.full_messages.each do |msg| %>
-				     <div class="text-center">
-					 	<%= msg %>
-				 	</div>
-				   <% end %>
-				 <% end %>
-	<div class="main-center">
-    	<%= form_with(model:@budget,local:true, url: budget_path ,class: 'form-horizontal') do |f|  %>	 
-    		<div class="form-group">
-    		   <div class="text-center">
-    			<label for="name" class="cols-sm-2 control-label"><%= @budget.month %>分月予算 編集</label>
-    		    </div>
-
-    				<div class="text-center">
-    					<label for="name" class="cols-sm-2 control-label">予算額</label>
-    					<%= f.number_field :budget ,class:'form-control'%>
-    				</div>
+<% if @budget.errors.any? %>
+<% @budget.errors.full_messages.each do |msg| %>
+<div class="text-center">
+	<%= msg %>
+</div>
+<% end %>
+<% end %>
+<div class="main-center">
+	<%= form_with(model:@budget,local:true, url: budget_path ,class: 'form-horizontal') do |f|  %>	 
+	<div class="form-group">
+		<div class="text-center">
+			<label for="name" class="cols-sm-2 control-label"><%= @budget.month %>分月予算 編集</label>
+		</div>
+		
+		<div class="text-center">
+			<label for="name" class="cols-sm-2 control-label">予算額</label>
+			<%= f.number_field :budget ,class:'form-control'%>
+		</div>
 		<%= f.hidden_field :month %>
-	    <div class="text-center">
-		  <%= f.submit '登録' ,class:'btn btn-primary'%>
-        </div>
+		<div class="text-center">
+			<%= f.submit '登録' ,class:'btn btn-primary'%>
+		</div>
 		<% end %>
 	</div>
-	
-	
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker10').datetimepicker({
-                viewMode: 'years',
-                format: 'YYYY/MM'
-            });
-        });
-    </script>
+	<script type="text/javascript">
+	$(function () {
+		$('#datetimepicker10').datetimepicker({
+			viewMode: 'years',
+			format: 'YYYY/MM'
+		});
+	});
+</script>

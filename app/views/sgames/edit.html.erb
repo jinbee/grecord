@@ -1,35 +1,35 @@
 
-	<div class="main-center">
-				 <% if @sgames.errors.any? %>
-				   <% @sgames.errors.full_messages.each do |msg| %>
-				     <div class="text-center">
-					 	<%= msg %>
-				 	</div>
-				   <% end %>
-				 <% end %>
-    	<%= form_with(model:@sgames,local:true, url: sgame_path ,class: 'form-horizontal') do |f|  %>	 
-    		<div class="form-group">
-    			<label for="name" class="cols-sm-2 control-label">Game Title</label>
-    			<div class="cols-sm-10">
-    				<div class="input-group">
-    					<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-    					<%= f.text_field :gname ,class:'form-control'%>
-    				</div>
-    			</div>
-    			
-    			
-    			<div class="cols-sm-10">
-    				<div class="input-group">
-    				    <% if(@sgames.status == 'true') %>
-    				      <%= f.check_box :status , {:checked => true} , "true", "false"%>
-    				    <% else %>
-    				      <%= f.check_box :status , {} , "true", "false"%>
-    				    <% end %>
-    				    <label for="name" class="cols-sm-2 control-label">課金中ならチェックを入れて下さい。</label>
-    				</div>
-    			</div>
-	    <div class="text-center">
-		  <%= f.submit '登録' ,class:'btn btn-primary'%>
-        </div>
+<div class="main-center">
+	<% if @sgames.errors.any? %>
+	<% @sgames.errors.full_messages.each do |msg| %>
+	<div class="text-center">
+		<%= msg %>
+	</div>
+	<% end %>
+	<% end %>
+	<%= form_with(model:@sgames,local:true, url: sgame_path ,class: 'form-horizontal') do |f|  %>	 
+	<div class="form-group">
+		<label for="name" class="cols-sm-2 control-label">Game Title</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+				<%= f.text_field :gname ,class:'form-control'%>
+			</div>
+		</div>
+		
+		
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<% if(@sgames.status == 'true') %>
+				<%= f.check_box :status , {:checked => true} , "true", "false"%>
+				<% else %>
+				<%= f.check_box :status , {} , "true", "false"%>
+				<% end %>
+				<label for="name" class="cols-sm-2 control-label">課金中ならチェックを入れて下さい。</label>
+			</div>
+		</div>
+		<div class="text-center">
+			<%= f.submit '登録' ,class:'btn btn-primary'%>
+		</div>
 		<% end %>
 	</div>
