@@ -27,9 +27,9 @@
                  <tr>
                    <td><%= g.gname %></td>
                    <% if g.status == 'true'%>
-                    <td><%= link_to 'enable' , toggle_sgame_path(g.id) , class: "btn btn-info active" %></td>
+                    <td><%= link_to '課金中' , toggle_sgame_path(g.id) , class: "btn btn-info active" %></td>
                       <% else %>
-                    <td><%= link_to 'disable' , toggle_sgame_path(g.id) , class: "btn btn-info" %></td>  
+                    <td><%= link_to '課金停止中' , toggle_sgame_path(g.id) , class: "btn btn-info" %></td>  
                    <% end %>
                    <td>
                        <%= link_to '編集' , edit_sgame_path(g.id) , class: "btn btn-link active"%>

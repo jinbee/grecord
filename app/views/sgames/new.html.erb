@@ -16,10 +16,10 @@
     				</div>
     			</div>
     			
-    			<label for="name" class="cols-sm-2 control-label">有効/無効</label>
+    			
     			<div class="cols-sm-10">
     				<div class="input-group">
-    				    <%= f.check_box :status , {} , "true", "false" %>
+    				    <%= f.check_box :status , {:checked => true} , "true", "false" %><label for="name" class="cols-sm-2 control-label">課金中ならチェックを入れて下さい。</label>
     				</div>
     			</div>
 	    <div class="text-center">

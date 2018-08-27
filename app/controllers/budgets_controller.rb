@@ -1,16 +1,20 @@
 class BudgetsController < ApplicationController
-  before_action :chk_login,only:[:list,:create,:destroy,:update,:edit,:list] 
+  before_action :chk_login,only:[:list,:create,:destroy,:update,:edit,:list]
+  before_action :find_budget,only:[:destroy,:update,:edit]
+  
   def index
     redirect_to list_budgets_path
   end
   
   def list
     @budgets = Budget.where(user_id:current_user.id )
+    p @budgets
+    p '-----'
   end
   
   def destroy
-    @sgame = Budget.find_by(month:params[:id],user_id:current_user.id)
-    @sgame.destroy
+    #@sgame = Budget.find_by(month:params[:id],user_id:current_user.id)
+    @budget.destroy
     redirect_to list_budgets_path,notice: '削除しました'
   end
   
@@ -41,8 +45,8 @@ class BudgetsController < ApplicationController
   end
   
   def update
-    @budget = Budget.find(params[:id])
-    # @budget = Budget.(budget_params[:month],user_id:current_user.id)
+    #@budget = Budget.find(params[:id])
+    #@budget = Budget.find_by(id:params[:id],user_id:current_user.id)
     
     if @budget.update(budget_params)
       redirect_to list_budgets_path,notice:"編集しました"
@@ -52,8 +56,8 @@ class BudgetsController < ApplicationController
   end
   
   def edit
-    record = Budget.find_by(id:params[:id],user_id:current_user.id)
-    @budget = record
+    #record = Budget.find_by(id:params[:id],user_id:current_user.id)
+    #@budget = record
   end
   
   private 
@@ -61,5 +65,9 @@ class BudgetsController < ApplicationController
   def budget_params
     params.require(:budget).permit(:budget,:month)
   end
+  
+   def find_budget
+    @budget = Budget.find_by(id:params[:id],user_id:current_user.id)
+   end  
   
 end

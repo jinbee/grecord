@@ -1,5 +1,7 @@
 class RecordsController < ApplicationController
   before_action :chk_login,only:[:mypage,:create,:monthinfo,:destroy,:update,:list,:detail,:event]
+  before_action :find_record,only:[:edit,:update,:destroy]
+  
   def index
     if logged_in?
       redirect_to mypage_records_path
@@ -15,7 +17,7 @@ class RecordsController < ApplicationController
     sgames =  @user.sgames.where(status:"true")
     
     if sgames.blank?
-      redirect_to sgames_path,notice:  '1つ以上のゲーム登録して有効にしてください。'
+      redirect_to sgames_path,notice:  '1つ以上のゲームを登録して課金中の状態にして下さい。'
     else   
       sgames.each do |g|
         #next if g.status == 'false'
@@ -51,7 +53,7 @@ class RecordsController < ApplicationController
   end
   
   def edit
-    @record = Record.find(params[:id])
+    #@record = Record.find(params[:id])
     @user = current_user
     @select = {}
     sgames =  @user.sgames.all
@@ -134,7 +136,7 @@ class RecordsController < ApplicationController
 end
 
 def update
-  @record = Record.find(params[:id])
+  #@record = Record.find(params[:id])
   
   if @record.update(record_params)
     redirect_to list_records_path,notice:"編集しました"
@@ -149,7 +151,7 @@ def update
   end
 end
 def destroy
-  @record = Record.find(params[:id])
+  #@record = Record.find(params[:id])
   @record.destroy
   
   path = Rails.application.routes.recognize_path(request.referer)
@@ -238,9 +240,12 @@ end
 
 private 
 
-def record_params
-  params.require(:record).permit(:sgame_id,:outgo,:count,:purpose,:routine,:result,:maxrate,:recorddate)
-end
+   def record_params
+    params.require(:record).permit(:sgame_id,:outgo,:count,:purpose,:routine,:result,:maxrate,:recorddate)
+   end
 
+   def find_record
+    @record = Record.find_by(id:params[:id],user_id:current_user.id)
+   end
 
 end

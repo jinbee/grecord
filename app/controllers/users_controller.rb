@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
-
-
+  before_action :chk_login,only:[:destroy,:editpw,:edit] 
+  before_action -> {
+     chk_user(params[:id])
+  }, only:[:destroy,:editpw,:edit,:update] 
+  
   def signup
     @user = User.new
   end
@@ -22,6 +25,10 @@ class UsersController < ApplicationController
   end
   
   def edit
+
+    chk_user params[:id]
+
+
     @user = User.find(params[:id])
   end
 
@@ -65,6 +72,10 @@ class UsersController < ApplicationController
 
   def useredit_params
    params.require(:user).permit(:name,:email)
+  end
+  
+  def chk_user target_id
+    redirect_to info_users_path unless target_id.to_i == current_user.id
   end
 
 end
