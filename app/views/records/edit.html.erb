@@ -1,12 +1,12 @@
 <% if @record.errors.any? %>
-<% @record.errors.full_messages.each do |msg| %>
-<div class="alert alert-danger" role="alert">
-  <i class="fa fa-check" aria-hidden="true"></i>
-  <%= msg %>
-</div>
+  <% @record.errors.full_messages.each do |msg| %>
+    <div class="alert alert-danger" role="alert">
+      <i class="fa fa-check" aria-hidden="true"></i>
+      <%= msg %>
+    </div>
+  <% end %>
 <% end %>
-<% end %>
-<%= form_with(model:@record,url:record_path,local:true,class: 'form-horizontal') do |f|  %>
+<%= form_with(model:@record,url:record_path,local:true,class: 'form-horizontal') do |f| %>
 <div class="row">
   <div class="col-sm-6">
     <label for="inputGname">ソシャゲ名</label>
@@ -29,7 +29,6 @@
     <label for="inputOutgo">ガチャ回数</label>
     <%= f.number_field :count %>
   </div>
-  
   <div class="col-sm-6">
     <label for="inputPurpose">目標</label>
     <%= f.text_area :purpose ,class:"form-control" %>
@@ -45,7 +44,6 @@
   <div class="col-sm-6">
     <label for="inputOutgo">最高レア数</label>
     <%= f.number_field :maxrate %>
-    
   </div>
   <div class="col-sm-12">
     <%= f.submit '登録' ,class:'btn btn-primary btn-block'%>

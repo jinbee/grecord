@@ -1,122 +1,96 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport"    content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
-  <!--link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700"-->
-  
-  <title>Acheve</title>
-  
-  <%= csrf_meta_tags %>
-  
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
-<% if logged_in? %>
-<body>
-  <% else %>
-  <body class="home">	
-    <% end %>
-    <header id="header">
-      <div id="head" class="parallax" parallax-speed="2">
-        <h1 id="logo" class="text-center">
-          <% if logged_in? %>
-          <span class="title">ご利用は計画的に</span>
-          <span class="tagline">ログイン中：<%= @current_user.name %></span>
-          <% else %>	
-          <img class="img-circle" src="<%= asset_path "avatar.jpg" %>" alt="">
-          <span class="title">ガチャ手帳</span>
-          <span class="tagline">そこに至るは大勝利か爆死か</span>
-          <% end %>
-        </h1>
-      </div>
-      
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span> 
-              <span class="icon-bar"></span> 
-              <span class="icon-bar"></span>
-            </button>
-            
-          </div>
-          <% if logged_in? %>
-          <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-            
-            <ul class="nav navbar-nav">
-              
-              <li><%= link_to 'ガチャ記帳' , root_path  %></li>
-              <li><%= link_to 'ソシャゲ管理' , sgames_path %></li>
-              <li><%= link_to '月予算管理' , list_budgets_path %></li>
-              <li><%= link_to 'ガチャ記録管理' , list_records_path %></li>			
-              <li><%= link_to 'アカウント管理' , info_users_path %></li>
-              <li><%= link_to 'Logout' ,session_path(current_user.id), method: :delete %></li>
-              
-            </ul>
-            
-          </div>
-          <% end %>	
-        </div>	
-      </nav>
-      
-      
-      
-    </header>
-    <main id="main">  
-      <div class="container">
-        
-        
-        
-        <%= yield %>
-        
-        
-      </div>
-    </main>
-    
-    <footer id="footer" class="topspace">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 widget">
-            <h3 class="widget-title">About</h3>
-            <div class="widget-body">
-              <p>	Dive into Code Achieve</p>
-              
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Sergey Pozhilov (GetTemplate.com)">
+    <!--link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700"-->
+    <title>Acheve</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <% if logged_in? %>
+    <body>
+    <% else %>
+      <body class="home">
+      <% end %>
+      <header id="header">
+        <div id="head" class="parallax" parallax-speed="2">
+          <h1 id="logo" class="text-center">
+            <% if logged_in? %>
+              <span class="title">ご利用は計画的に</span>
+              <span class="tagline">ログイン中：<%= @current_user.name %></span>
+            <% else %>
+              <img class="img-circle" src="<%= asset_path "avatar.jpg" %>" alt="">
+              <span class="title">ガチャ手帳</span>
+              <span class="tagline">そこに至るは大勝利か爆死か</span>
+            <% end %>
+          </h1>
+        </div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
             </div>
+            <% if logged_in? %>
+              <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li><%= link_to 'ガチャ記帳' , root_path %></li>
+                  <li><%= link_to 'ソシャゲ管理' , sgames_path %></li>
+                  <li><%= link_to '月予算管理' , list_budgets_path %></li>
+                  <li><%= link_to 'ガチャ記録管理' , list_records_path %></li>
+                  <li><%= link_to 'アカウント管理' , info_users_path %></li>
+                  <li><%= link_to 'Logout' ,session_path(current_user.id), method: :delete %></li>
+                </ul>
+              </div>
+            <% end %>
           </div>
-          
-          
-          <div class="col-md-6 widget">
-            <h3 class="widget-title">Form widget</h3>
-            <div class="widget-body">
-              <p>
-                <a href="mailto:#">some.email@somewhere.com</a><br>
-                <br>
-                made by me
-              </p>	
-            </div>
-          </div>
-          
-        </div> <!-- /row of widgets -->
-      </div>
-    </footer>
-    
-    <footer id="underfooter">
-      <div class="container">
-        <div class="row">
-          
-          <div class="col-md-12 widget">
-            <div class="widget-body">
-
+        </nav>
+      </header>
+      <main id="main">
+        <div class="container">
+          <%= yield %>
+        </div>
+      </main>
+      <footer id="footer" class="topspace">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 widget">
+              <h3 class="widget-title">About</h3>
+              <div class="widget-body">
+                <p>
+                  Dive into Code Achieve</p>
               </div>
             </div>
-            
-          </div> 
+            <div class="col-md-6 widget">
+              <h3 class="widget-title">Form widget</h3>
+              <div class="widget-body">
+                <p>
+                  <a href="mailto:#">some.email@somewhere.com</a><br>
+                  <br>
+                  made by me
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- /row of widgets -->
         </div>
-      </footer>  
+      </footer>
+      <footer id="underfooter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 widget">
+              <div class="widget-body"></div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </body>
-    </html>
+  </html>

@@ -1,41 +1,41 @@
 <div class="container">
-  
   <div class="row">
-    
     <div class="col-sm-6 col-sm-offset-3">
       <div class="text-center">
         <%= link_to '月予算設定' , new_budget_path , class: "btn btn-primary btn-block" %>
-      </div> 
+      </div>
     </div>
-    
     <h2 class="section-title"></h2>
     <div class="col-sm-10 col-sm-offset-1">
       <% if notice %>
-      <div class="alert alert-info" role="alert">
-        <i class="fa fa-check" aria-hidden="true"></i>
-        <%= notice %>
-      </div>
+        <div class="alert alert-info" role="alert">
+          <i class="fa fa-check" aria-hidden="true"></i>
+          <%= notice %>
+        </div>
       <% end %>
       <% if @budgets.blank? %>
-      <div class="alert alert-danger" role="alert">
-        <h4>月のガチャ予算設定がありません。</h4>
-      </div>
+        <div class="alert alert-danger" role="alert">
+          <h4>月のガチャ予算設定がありません。</h4>
+        </div>
       <% else %>
-      <table class="table table-striped">
-        <tr><th class="col-xs-7">Month</th><th>予算</th><th></th></tr>   
-        <% @budgets.each do |m| %>
-        <tr>
-          <td><%= m.month %></td>
-          <td><%= m.budget %></td>
-          <td>
-            <%= link_to '編集' , edit_budget_path(m.id) , class: "btn btn-link active"%>
-            <%= link_to '削除' , budget_path(m.month),method: :delete,data:{confirm:'削除しますか?'} , class: "btn btn-link"%>
-          </td>
-        </tr>
-        <% end %>
-      </table>
+        <table class="table table-striped">
+          <tr>
+            <th class="col-xs-7">Month</th>
+            <th>予算</th>
+            <th></th>
+          </tr>
+          <% @budgets.each do |m| %>
+            <tr>
+              <td><%= m.month %></td>
+              <td><%= m.budget %></td>
+              <td>
+                <%= link_to '編集' , edit_budget_path(m.id) , class: "btn btn-link active"%>
+                <%= link_to '削除' , budget_path(m.month),method: :delete,data:{confirm:'削除しますか?'} , class: "btn btn-link"%>
+              </td>
+            </tr>
+          <% end %>
+        </table>
       <% end %>
-        
     </div>
   </div>
 </div>

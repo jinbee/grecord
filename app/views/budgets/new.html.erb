@@ -1,13 +1,12 @@
 <% if @budget.errors.any? %>
-<% @budget.errors.full_messages.each do |msg| %>
-<div class="text-center">
-	<%= msg %>
-</div>
-<% end %>
+	<% @budget.errors.full_messages.each do |msg| %>
+		<div class="text-center">
+			<%= msg %>
+		</div>
+	<% end %>
 <% end %>
 <div class="main-center">
-	
-	<%= form_with(model:@budget,local:true, url: budgets_path ,class: 'form-horizontal') do |f|  %>	 	
+	<%= form_with(model:@budget,local:true, url: budgets_path ,class: 'form-horizontal') do |f| %>
 	<div class="form-group">
 		<label for="month" class="cols-sm-2 control-label">設定月</label>
 		<div class='input-group date' id='datetimepicker10'>
@@ -24,18 +23,10 @@
 	<div class="text-center">
 		<%= f.submit '登録' ,class:'btn btn-primary'%>
 	</div>
-	
-	<% end %>
-	
+<% end %>
 </div>
 <script type="text/javascript">
 $(function () {
-	$('#datetimepicker10').datetimepicker({
-		viewMode: 'months',
-		locale: 'ja',
-		format: 'YYYYMM'
-	});
+	$('#datetimepicker10').datetimepicker({viewMode: 'months', locale: 'ja', format: 'YYYYMM'});
 });
 </script>
-
-

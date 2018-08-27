@@ -5,97 +5,90 @@
         <span id="modalTitle" class="modal-title">ガチャ記録詳細</span>
       </div>
       <div id="modalBody" class="modal-body"></div>
-      
       <div class="row text-center">
-
         <div class="col-sm-6">
           <label for="inputGname">ソシャゲ名</label>
-          <span id="gname" >aaaaa</span>
+          <span id="gname">aaaaa</span>
         </div>
         <div class="col-sm-6">
           <label for="inputGname">ガチャ日時</label>
-          <span id="recorddate" >aaaaa</span>
+          <span id="recorddate">aaaaa</span>
         </div>
         <div class="col-sm-6">
           <label for="inputGname">課金額</label>
-          <span id="outgo" >aaaaa</span>円
+          <span id="outgo">aaaaa</span>円
         </div>
         <div class="col-sm-6">
           <label for="inputGname">ガチャ回数</label>
-          <span id="count" >aaaaa</span>回
+          <span id="count">aaaaa</span>回
         </div>
         <div class="col-sm-12">
           <label for="inputGname">目標</label>
         </div>
         <div class="col-sm-12">
-          <span id="purpose" >aaaaa</span>
+          <span id="purpose">aaaaa</span>
         </div>
         <div class="col-sm-12">
           <label for="inputGname">おまじない/ルーチン</label>
         </div>
         <div class="col-sm-12">
-          <span id="routine" >aaaaa</span>
+          <span id="routine">aaaaa</span>
         </div>
         <div class="col-sm-6">
           <label for="inputGname">結果</label>
-          <span id="result" >aaaaa</span>
+          <span id="result">aaaaa</span>
         </div>
         <div class="col-sm-6">
           <label for="inputGname">最高レア数</label>
-          <span id="maxrate" >aaaaa</span>
+          <span id="maxrate">aaaaa</span>
         </div>
-        <span id="buttons" >aaaaa</span>
-
+        <span id="buttons">aaaaa</span>
         <a role="button" class="btn btn-default" data-dismiss="modal">閉じる</a>
       </div>
       <div id="modalFooter" class="modal-footer"></div>
     </div>
   </div>
 </div>
-
 <div class="container">
-
   <% if @record.errors.any? %>
-  <% @record.errors.full_messages.each do |msg| %>
+    <% @record.errors.full_messages.each do |msg| %>
       <div class="alert alert-danger" role="alert">
         <i class="fa fa-check" aria-hidden="true"></i>
         <%= msg %>
       </div>
-  <% end %>
+    <% end %>
   <% end %>
   <% if notice %>
-  <div class="alert alert-info" role="alert">
-    <i class="fa fa-check" aria-hidden="true"></i>
-    <%= notice %>
-  </div>
+    <div class="alert alert-info" role="alert">
+      <i class="fa fa-check" aria-hidden="true"></i>
+      <%= notice %>
+    </div>
   <% end %>
   <div class="row topspace">
     <article class="col-sm-12 text-center">
       <article class="col-sm-4 text-center">
         予算残高
-        <h1 class="jumbo"><span id="t_balance" >0</span>円</h1>
+        <h1 class="jumbo">
+          <span id="t_balance">0</span>円</h1>
       </article>
       <article class="col-sm-4 text-center">
         課金額
-        <h1 class="jumbo"><span id="t_outgo" >0</span>円</h1>
+        <h1 class="jumbo">
+          <span id="t_outgo">0</span>円</h1>
       </article>
       <article class="col-sm-4 text-center">
         ガチャ回数
-        <h1 class="jumbo"><span id="t_count" >0</span>回</h1>
+        <h1 class="jumbo">
+          <span id="t_count">0</span>回</h1>
       </article>
-        
-    </article>	
-
+    </article>
     <article class="col-sm-7 maincontent">
       <div id="calendar"></div>
     </article>
-        
     <aside class="col-sm-5 sidebar sidebar-left">
-      
       <div class="widget">
         <h4>記帳</h4>
-        
-        <%= form_with(model:@record,url:records_path,local:true,class: 'form-horizontal') do |f|  %>
+        <%= form_with(model:@record,url:records_path,local:true,class: 'form-horizontal') do |f| %>
         <div class="row">
           <div class="col-sm-6">
             <label for="inputGname">ソシャゲ名</label>
@@ -129,32 +122,23 @@
         </div>
         <label for="inputComment">結果</label>
         <%= select :record, :result, [['大勝利','大勝利'],['勝利','勝利'],['辛勝','辛勝'],['瀕死','瀕死'],['爆死','爆死']] %>
-        
+
         <label for="inputOutgo">最高レア数</label>
         <%= f.number_field :maxrate %>
         <div>
           <%= f.submit '登録' ,class:'btn btn-primary btn-block'%>
         </div>
-        <% end %>
-        
-      </div>
-      
-    </aside>		
-  </div>
+      <% end %>
+    </div>
+  </aside>
 </div>
-
+</div>
 <script>
-
-
 $(function () {
-  $('#datetimepicker').datetimepicker({
-    locale: 'ja',
-    format : 'YYYY-MM-DD HH:mm:ss'
-  });
+  $('#datetimepicker').datetimepicker({locale: 'ja', format: 'YYYY-MM-DD HH:mm:ss'});
 });
 
-
-$(document).ready(function() {
+$(document).ready(function () {
   $('#calendar').fullCalendar({
     themeSystem: 'bootstrap3',
     navLinks: true,
@@ -162,51 +146,43 @@ $(document).ready(function() {
     selectHelper: false,
     events: '/records/event',
     editable: false,
-    viewRender : function (view, element) {
-      
-      $.ajax( {
+    viewRender: function (view, element) {
+
+      $.ajax({
         url: '/records/monthinfo',
-        
         data: {
-          'month': view.title,
+          'month': view.title
         },
         type: 'get',
-        success: function( return_val ) {
-          if( return_val ) {
-            //$('body').removeClass('modal-open');
-            //$('.modal-backdrop').remove();				
-            //$('#calendarModal').modal('hide'); 
-            //$('#t_balance').html(return_val.balance);
+        success: function (return_val) {
+          if (return_val) {
+            //$('body').removeClass('modal-open'); $('.modal-backdrop').remove(); $('#calendarModal').modal('hide'); $('#t_balance').html(return_val.balance);
             $('#t_outgo').html(return_val.outgo);
             $('#t_count').html(return_val.count);
-            
-            var count1 = new CountUp('t_balance', return_val.budget, return_val.balance , 0, 2.5);
-             count1.start()
-            if (return_val.outgo > 0 ){
-             var count2 = new CountUp('t_outgo', return_val.outgo - 1000, return_val.outgo , 0, 2.5);
-             count2.start()
+
+            var count1 = new CountUp('t_balance', return_val.budget, return_val.balance, 0, 2.5);
+            count1.start()
+            if (return_val.outgo > 0) {
+              var count2 = new CountUp('t_outgo', return_val.outgo - 1000, return_val.outgo, 0, 2.5);
+              count2.start()
             }
-
             //$('#ratio').html(Math.round(return_val.rarecount / return_val.count * 100));
-
           } else {
             alert('データが取得できませんでした。')
           }
         }
-      } );
+      });
     },
-    eventClick: function(event) { 
+    eventClick: function (event) {
       var id = event.id
-      
-
-      $.ajax( {
+      $.ajax({
         url: '/records/detail',
         data: {
-          'id': id,
+          'id': id
         },
         type: 'get',
-        success: function( return_val ) {
-          if( return_val ) {
+        success: function (return_val) {
+          if (return_val) {
             //	console.log( return_val.outgo)
             $('#outgo').html(return_val.outgo);
             $('#purpose').html(return_val.purpose);
@@ -215,20 +191,16 @@ $(document).ready(function() {
             $('#result').html(return_val.result);
             $('#maxrate').html(return_val.maxrate);
             $('#gname').html(return_val.gname);
-            $('#recorddate').html(return_val.recorddate);	
-            var buttons = 
-            '<td><a data-confirm="削除しますか?" class="btn btn-link" rel="nofollow" data-method="delete" href="/records/' + id + '">削除</a></td>'
+            $('#recorddate').html(return_val.recorddate);
+            var buttons = '<td><a data-confirm="削除しますか?" class="btn btn-link" rel="nofollow" data-method="delete" href="/records/' + id + '">削除</a></td>'
             $('#buttons').html(buttons);
-            $('#calendarModal').modal('show'); 
-
+            $('#calendarModal').modal('show');
           } else {
             alert('データが取得できませんでした。')
           }
         }
-      } );
-    },   
-    
-    
+      });
+    }
   });
 });
 </script>

@@ -237,7 +237,7 @@ def event
 
 end
 
-private 
+  private 
 
    def record_params
     params.require(:record).permit(:sgame_id,:outgo,:count,:purpose,:routine,:result,:maxrate,:recorddate)

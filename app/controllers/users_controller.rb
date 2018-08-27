@@ -25,17 +25,14 @@ class UsersController < ApplicationController
   end
   
   def edit
-
     chk_user params[:id]
-
-
     @user = User.find(params[:id])
   end
 
   def update
     
     @user = User.find(params[:id])
-
+    
     path = Rails.application.routes.recognize_path(request.referer)
     if path[:action] == 'edit'
       @user.attributes = params[:user].permit(:name, :email)
@@ -52,8 +49,7 @@ class UsersController < ApplicationController
        render 'editpw'
       end
     end    
-    
-
+ 
   end
   
   def destroy
@@ -62,10 +58,10 @@ class UsersController < ApplicationController
     @user.destroy
     flash[:notice] = 'アカウントを削除しました'
     redirect_to root_path    
-    
-  end
+   end
   
   private
+
   def user_params
    params.require(:user).permit(:name,:email,:password,:password_confirmation,:user_id)
   end
