@@ -16,7 +16,6 @@ class SgamesController < ApplicationController
 
   def update
   #  @sgames = Sgame.find_by(id:params[:id],user_id:current_user.id)
-
     if @sgames.update(sgame_params)
      redirect_to sgames_path,notice:"編集しました"
     else
@@ -52,8 +51,6 @@ class SgamesController < ApplicationController
       @sgame.update_attribute(:status, 'true')
       redirect_to sgames_path,notice: @sgame.gname + 'を課金する事にしてしまいました。'
     end
-
-
   end
  
   private 

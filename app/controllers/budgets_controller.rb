@@ -8,8 +8,6 @@ class BudgetsController < ApplicationController
   
   def list
     @budgets = Budget.where(user_id:current_user.id )
-    p @budgets
-    p '-----'
   end
   
   def destroy

@@ -200,8 +200,7 @@ def list
     @result =  result.to_hash
     @result2 =  result2.to_hash
     @result2[0]['rate'] = (@result2[0]['victory'].to_f / @result2[0]['count'].to_f).round(2) *100
-    p @result2
-    p '-----------'
+
 end
 
 def detail
